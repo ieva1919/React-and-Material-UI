@@ -23,9 +23,9 @@ export default class extends Component {
         const { open } = this.state
 
         return <Fragment>
-            <Button variant="fab" size="medium" onClick={this.handleToggle}>
-                <AddCircleIcon />
-            </Button>
+            <AddCircleIcon>
+                <Button variant="fab" onClick={this.handleToggle} color="white" />
+            </AddCircleIcon >
             <Dialog
                 open={open}
                 onClose={this.handleToggle}
