@@ -4,14 +4,17 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import CreateDialog from "../Exercises/Dialogs/Create"
 
-function Header() {
+function Header({ muscles, onExerciseCreate }) {
     return (
         <AppBar position="static">
             <Toolbar>
                 <Typography variant="h6" color="inherit" style={{ flex: 1 }}>
                     Exercises database
                 </Typography>
-                <CreateDialog />
+                <CreateDialog
+                    muscles={muscles}
+                    onCreate={onExerciseCreate}
+                />
             </Toolbar>
         </AppBar>
     );
