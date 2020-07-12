@@ -28,36 +28,51 @@ export default class extends Component {
     )
   }
 
-  handleCategorySelect = category => {
+  handleCategorySelect = category =>
     this.setState({
       category
     })
-  }
 
-  handleExersiceSelected = id => {
+
+  handleExersiceSelected = id =>
     this.setState(({ exercises }) => ({
       exercise: exercises.find(ex => ex.id === id)
     }))
-  }
 
-  handleExerciseCreate = exercise => {
+
+  handleExerciseCreate = exercise =>
     this.setState(({ exercises }) => ({
       exercises: [
         ...exercises,
         exercise
       ]
     }))
-  }
 
-  handleExersiceDelete = id => {
+
+  handleExersiceDelete = id =>
     this.setState(({ exercises }) => ({
       exercises: exercises.filter(ex => ex.id !== id)
     }))
-  }
+
+
+  handleExersiceEdit = id =>
+    this.setState(({ exercises }) => ({
+      exercise: exercises.find(ex => ex.id === id),
+      editMode: true
+    }))
+
+  handleExerciseEdit = exercise =>
+    this.setState(({ exercises }) => ({
+      exercises: [
+        ...exercises.filter(ex => ex.id !== exercise.id),
+        exercise
+      ]
+    }))
+
 
   render() {
     const exercises = this.getExercisesByMuscles(),
-      { category, exercise } = this.state
+      { category, exercise, editMode } = this.state
 
     return <Fragment>
       <Header
@@ -68,8 +83,12 @@ export default class extends Component {
         exercise={exercise}
         category={category}
         exercises={exercises}
+        editMode={editMode}
+        muscles={muscles}
         onSelect={this.handleExersiceSelected}
         onDelete={this.handleExersiceDelete}
+        onSelectEdit={this.handleExersiceEdit}
+        onEdit={this.handleExerciseEdit}
       />
       <Footer
         category={category}

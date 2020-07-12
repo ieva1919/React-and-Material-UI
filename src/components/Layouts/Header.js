@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import CreateDialog from "../Exercises/Dialogs/Create"
+import Dialog from "../Exercises/Dialog"
 
 function Header({ muscles, onExerciseCreate }) {
     return (
@@ -11,7 +11,7 @@ function Header({ muscles, onExerciseCreate }) {
                 <Typography variant="h6" color="inherit" style={{ flex: 1 }}>
                     Exercises database
                 </Typography>
-                <CreateDialog
+                <Dialog
                     muscles={muscles}
                     onCreate={onExerciseCreate}
                 />
