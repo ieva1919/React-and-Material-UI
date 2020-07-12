@@ -64,6 +64,7 @@ export default ({ muscles, exercises, category, editMode, onSelect, exercise, ex
                     <Form
                         muscles={muscles}
                         onSubmit={onEdit}
+                        exercise={exercise}
                     />
                     :
                     <Fragment>

@@ -34,6 +34,12 @@ export default withStyles(styles)(class extends Component {
         }
     }
 
+    componentWillReceiveProps({ exercise }) {
+        this.setState({
+            ...exercise
+        })
+    }
+
     handleChange = name => ({ target: { value } }) => {
         this.setState({
             [name]: value
@@ -41,25 +47,17 @@ export default withStyles(styles)(class extends Component {
     };
 
     handleSubmit = () => {
-        const { exercise } = this.state
         this.props.onSubmit({
-            ...exercise,
-            id: exercise.title.toLocaleLowerCase().replace(/ /g, '-')
+            id: this.state.title.toLocaleLowerCase().replace(/ /g, '-'),
+            ...this.state
         })
 
-        this.setState({
-            open: false,
-            exercise: {
-                title: "",
-                description: "",
-                muscles: "",
-            }
-        })
+        this.setState(this.getInitstate())
     }
 
     render() {
         const { title, description, muscles } = this.state,
-            { classes, muscles: categories } = this.props
+            { classes, exercise, muscles: categories } = this.props
 
         return <form>
             <TextField
@@ -99,7 +97,7 @@ export default withStyles(styles)(class extends Component {
                 onClick={this.handleSubmit}
                 color="primary"
             >
-                Create
+                {exercise ? "Edit" : "Create"}
             </Button>
         </form>
     }
