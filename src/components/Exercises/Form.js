@@ -7,12 +7,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 
-const styles = theme => ({
-    FormControl: {
-        width: 250
-    }
-});
-
 const style = {
     MarginTop: {
         marginTop: 10,
@@ -21,7 +15,7 @@ const style = {
 
 
 
-export default withStyles(styles)(class extends Component {
+export default class extends Component {
     state = this.getInitstate()
 
     getInitstate() {
@@ -32,10 +26,6 @@ export default withStyles(styles)(class extends Component {
             description: " ",
             muslces: " "
         }
-    }
-
-    static getDerivedStateFromProps({ exercise }) {
-        return exercise || null
     }
 
     handleChange = name => ({ target: { value } }) => {
@@ -49,13 +39,11 @@ export default withStyles(styles)(class extends Component {
             id: this.state.title.toLocaleLowerCase().replace(/ /g, '-'),
             ...this.state
         })
-
-        this.setState(this.getInitstate())
     }
 
     render() {
         const { title, description, muscles } = this.state,
-            { classes, exercise, muscles: categories } = this.props
+            { exercise, muscles: categories } = this.props
 
         return <form>
             <TextField
@@ -63,16 +51,17 @@ export default withStyles(styles)(class extends Component {
                 rowsMax={4}
                 value={title}
                 onChange={this.handleChange('title')}
-                className={classes.FormControl}
+                fullWidth
             />
             <br />
-            <FormControl className={classes.FormControl}>
+            <FormControl fullWidth>
                 <InputLabel htmlFor="Muscles">
                     muscles
             </InputLabel>
                 <Select
                     value={muscles}
                     onChange={this.handleChange('muscles')}
+
                 >
                     {categories.map(category =>
                         <MenuItem key={category} value={category}>{category}</MenuItem>
@@ -87,17 +76,17 @@ export default withStyles(styles)(class extends Component {
                 rowsMax={4}
                 value={description}
                 onChange={this.handleChange('description')}
-                className={classes.FormControl}
+                fullWidth
             />
             <br />
             <Button style={style.MarginTop}
                 variant="contained"
                 onClick={this.handleSubmit}
                 color="primary"
+                disable={!title || !muscles}
             >
                 {exercise ? "Edit" : "Create"}
             </Button>
         </form>
     }
 }
-)

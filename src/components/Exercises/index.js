@@ -59,27 +59,26 @@ export default ({ muscles, exercises, category, editMode, onSelect, exercise, ex
         </Grid>
         <Grid item xs={12} sm={6}>
             <Paper style={style.Paper}>
+                <Typography
+                    variant="h4"
+                    gutterBottom
+                >
+                    {title}
+                </Typography>
                 {editMode
                     ?
                     <Form
+                        key={id}
                         muscles={muscles}
                         onSubmit={onEdit}
                         exercise={exercise}
                     />
                     :
-                    <Fragment>
-                        <Typography
-                            variant="h4"
-                        >
-                            {title}
-                        </Typography>
-                        <Typography
-                            variant="h6"
-                            style={{ marginTop: 20 }}
-                        >
-                            {description}
-                        </Typography>
-                    </Fragment>
+                    <Typography
+                        variant="h6"
+                    >
+                        {description}
+                    </Typography>
                 }
             </Paper>
         </Grid>

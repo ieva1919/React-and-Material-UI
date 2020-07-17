@@ -37,6 +37,7 @@ export default class extends Component {
             <Dialog
                 open={open}
                 onClose={this.handleToggle}
+                maxWidth='xs'
             >
                 <DialogTitle>
                     Create a new exercise
